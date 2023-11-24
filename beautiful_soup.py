@@ -12,15 +12,25 @@ urls = [
     "https://vancouver.craigslist.org/van/cto/d/burnaby-2013-nissan-altima/7689227562.html",
     "https://vancouver.craigslist.org/van/cto/d/burnaby-2015-nissan-altima-sv-limited/7688156758.html",
     "https://vancouver.craigslist.org/van/ctd/d/abbotsford-2017-nissan-altima-25/7682398377.html",
-    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2018-nissan-altima-sr-great-on/7681664187.html"
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2018-nissan-altima-sr-great-on/7681664187.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2015-hyundai-elantra-bad-credit/7687990526.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2015-volkswagen-passat-cc/7687991329.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2015-volkswagen-jetta-tsi/7687989624.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2017-nissan-sentra-sr-turbo/7686719350.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2017-hyundai-elantra-apple/7686314862.html",
+    "https://vancouver.craigslist.org/van/ctd/d/richmond-2013-nissan-sentra-sr-sport/7681732937.html",
+    "https://vancouver.craigslist.org/pml/ctd/d/maple-ridge-east-2016-nissan-altima-25s/7683097839.html"
 ]
+
+# Remove duplicates from the URL list
+unique_urls = list(set(urls))
 
 # Create lists to store data
 data = []
 
 def get_data():
     # Iterate through each URL and extract data
-    for url in urls:
+    for url in unique_urls:
         response = requests.get(url)
 
         if response.status_code == 200:
