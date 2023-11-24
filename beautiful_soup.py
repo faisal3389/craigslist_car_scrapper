@@ -19,7 +19,19 @@ urls = [
     "https://vancouver.craigslist.org/rds/ctd/d/surrey-2017-nissan-sentra-sr-turbo/7686719350.html",
     "https://vancouver.craigslist.org/rds/ctd/d/surrey-2017-hyundai-elantra-apple/7686314862.html",
     "https://vancouver.craigslist.org/van/ctd/d/richmond-2013-nissan-sentra-sr-sport/7681732937.html",
-    "https://vancouver.craigslist.org/pml/ctd/d/maple-ridge-east-2016-nissan-altima-25s/7683097839.html"
+    "https://vancouver.craigslist.org/pml/ctd/d/maple-ridge-east-2016-nissan-altima-25s/7683097839.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2015-honda-civic-si-turbo-manual/7689156400.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2017-mazda-mazda3-sport-finance/7688055833.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2019-nissan-rogue-sv-awd-clean/7688016666.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2017-hyundai-elantra-applze/7688017448.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2017-nissan-sentra-sr-turbo/7688017684.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2013-nissan-sentra-sv-great-on/7688000636.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2019-hyundai-elantra-apple/7688000783.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2015-hyundai-elantra-bad-credit/7687990526.html",
+    "https://vancouver.craigslist.org/van/ctd/d/vancouver-2015-kia-sportage-lx-awd-call/7687616644.html",
+    "https://vancouver.craigslist.org/rds/ctd/d/surrey-2019-hyundai-elantra-apple/7681661243.html",
+    "https://vancouver.craigslist.org/bnc/ctd/d/chevrolet-malibu/7681635336.html",
+    "https://vancouver.craigslist.org/bnc/ctd/d/burnaby-2007-lexus-is250-awd/7680106783.html"
 ]
 
 # Remove duplicates from the URL list
@@ -85,16 +97,19 @@ def get_data():
                     if isinstance(content, str) and content.strip():
                         description += content.strip() + " "
                 description = description.strip()
+
+                # Limit description size to 3000 characters
+                description = description[:1000]
             else:
                 description = "Description not available"
 
             # Append data to the list
-            data.append([title, price, location, condition, cylinders, fuel, odometer, transmission, title_status, paint_color, drive, vehicle_type, description, url])
+            data.append([title, price, condition, cylinders, fuel, odometer, transmission, title_status, paint_color, drive, vehicle_type, description, location, url])
         else:
             print(f"Failed to fetch the page: {url}")
 
     # Format the data with a serial number column to paste into Google Sheets
-    output = "Serial Number\tTitle\tPrice\tLocation\tCondition\tCylinders\tFuel\tOdometer\tTransmission\tTitle Status\tPaint Color\tDrive\tType\tDescription\tURL\n"  # Headers
+    output = "Serial Number\tTitle\tPrice\tCondition\tCylinders\tFuel\tOdometer\tTransmission\tTitle Status\tPaint Color\tDrive\tType\tDescription\tLocation\tURL\n"  # Headers
 
     for idx, row in enumerate(data, start=1):
         output += f"{idx}\t" + "\t".join(row) + "\n"
